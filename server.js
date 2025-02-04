@@ -1,12 +1,11 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-app.use(cors({ origin: '*' })); // Allow all origins (or specify your frontend URL)
-const app = express();
+const app = express(); // Initialize app first
 const port = process.env.PORT || 5000;
 
 // Middleware
-app.use(cors());
+app.use(cors({ origin: '*' })); // Allow all origins (or specify your frontend URL)
 app.use(express.json());
 
 // MongoDB Connection
