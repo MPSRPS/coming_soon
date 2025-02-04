@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+app.use(cors({ origin: '*' })); // Allow all origins (or specify your frontend URL)
 const app = express();
 const port = process.env.PORT || 5000;
 
