@@ -5,25 +5,21 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 // Middleware
-app.use(cors({ origin: '*' }));
+app.use(cors());
 app.use(express.json());
 
 // MongoDB Connection
-const mongoURI = process.env.MONGO_URI;
-
-mongoose.connect(mongoURI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
+const mongoURI = process.env.MONGO_URI; // Use environment variable
+mongoose.connect(mongoURI)
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.error('MongoDB connection error:', err));
 
-// Root Route
+// Root Route (Fix for "Cannot GET /")
 app.get('/', (req, res) => {
   res.send('Welcome to the server! Your API is working.');
 });
 
-// Schema and Model
+// Schema and Model for Subscribers
 const subscriberSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
 });
