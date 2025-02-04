@@ -9,10 +9,14 @@ app.use(cors());
 app.use(express.json());
 
 // MongoDB Connection
-const mongoURI = 'mongodb+srv://admin:<db_password>@aceeboardz.4hc3p.mongodb.net/?retryWrites=true&w=majority&appName=aceeboardz'; // Replace with your MongoDB connection string
-mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
+const mongoURI = 'mongodb+srv://admin:3KXRa2fe3HeUkHRL@aceeboardz.4hc3p.mongodb.net/?retryWrites=true&w=majority&appName=aceeboardz';mongoose.connect(mongoURI)
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.error('MongoDB connection error:', err));
+
+// Root Route (Fix for "Cannot GET /")
+app.get('/', (req, res) => {
+  res.send('Welcome to the server! Your API is working.');
+});
 
 // Schema and Model for Subscribers
 const subscriberSchema = new mongoose.Schema({
