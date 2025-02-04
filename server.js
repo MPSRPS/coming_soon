@@ -1,25 +1,29 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const app = express(); // Initialize app first
+const app = express();
 const port = process.env.PORT || 5000;
 
 // Middleware
-app.use(cors({ origin: '*' })); // Allow all origins (or specify your frontend URL)
+app.use(cors({ origin: '*' }));
 app.use(express.json());
 
 // MongoDB Connection
-const mongoURI = process.env.MONGO_URI; // Use environment variable
-mongoose.connect(mongoURI)
+const mongoURI = process.env.MONGO_URI;
+
+mongoose.connect(mongoURI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.error('MongoDB connection error:', err));
 
-// Root Route (Fix for "Cannot GET /")
+// Root Route
 app.get('/', (req, res) => {
   res.send('Welcome to the server! Your API is working.');
 });
 
-// Schema and Model for Subscribers
+// Schema and Model
 const subscriberSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
 });
